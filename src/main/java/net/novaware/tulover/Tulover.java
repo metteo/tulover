@@ -27,7 +27,7 @@ public class Tulover implements Runnable {
     ServletHolder jerseyServlet = servletContext.addServlet(ServletContainer.class, "/resources/*");
     jerseyServlet.setInitParameter(ServerProperties.PROVIDER_PACKAGES, "net.novaware.tulover");
 
-    Server server = new Server(8080);
+    Server server = new Server(8080); //TODO: read port from properties so tests can randomize it
     server.setHandler(servletContext);
 
     try {
@@ -38,8 +38,6 @@ public class Tulover implements Runnable {
       logger.info("Interrupted. Stopping the server");
     } catch (Exception ex) {
       logger.log(Level.SEVERE, "Unable to start the server: ", ex);
-    } finally {
-      server.destroy();
     }
   }
 }
