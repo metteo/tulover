@@ -21,7 +21,7 @@ class ManageAccountsFeature extends Specification {
   def setupSpec() {
     tulover = new Thread(new Tulover());
     tulover.start();
-    Thread.sleep(1000L) //wait for jetty to start
+    Thread.sleep(1000L) //wait for jetty to start, TODO: find a better way
   }
 
   def cleanupSpec() {
@@ -29,7 +29,7 @@ class ManageAccountsFeature extends Specification {
   }
 
   //scenario
-  def "should return 123 when making GET /accounts"() {
+  def "should return valid UUID when making GET /accounts"() {
     given:
     def target = ClientBuilder.newClient()
         .target("http://localhost:8080/")
@@ -40,9 +40,10 @@ class ManageAccountsFeature extends Specification {
 
     when:
     def response = accountsRes.get("123", null);
+    def entity = response.readEntity(Account.class);
 
     then:
     response.getStatus() == Status.OK.getStatusCode()
-    response.readEntity(Account.class).number == "123"
+    UUID.fromString(entity.number) != null
   }
 }

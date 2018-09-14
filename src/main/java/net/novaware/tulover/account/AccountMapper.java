@@ -1,13 +1,23 @@
 package net.novaware.tulover.account;
 
+import java.util.UUID;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper
-public interface AccountMapper {
+@Mapper(imports = UUID.class)
+public abstract class AccountMapper {
 
   @Mapping(target = "balance", ignore = true)
-  Account toAccount(AccountEntity input);
+  public abstract Account toAccount(AccountEntity input);
   
-  AccountEntity toAccountEntity(Account input);
+  public abstract AccountEntity toAccountEntity(Account input);
+  
+  protected UUID toUUID(String number) {
+    return UUID.fromString(number);
+  }
+  
+  protected String toString(UUID number) {
+    return number.toString();
+  }
 }
