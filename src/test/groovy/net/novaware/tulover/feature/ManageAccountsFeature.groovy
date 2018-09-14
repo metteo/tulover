@@ -8,8 +8,8 @@ import javax.ws.rs.core.Response.StatusType
 import org.glassfish.jersey.client.proxy.WebResourceFactory
 
 import net.novaware.tulover.Tulover
-import net.novaware.tulover.resource.Account
-import net.novaware.tulover.resource.AccountsResource
+import net.novaware.tulover.account.Account
+import net.novaware.tulover.account.AccountsResource
 import spock.lang.Shared
 import spock.lang.Specification
 

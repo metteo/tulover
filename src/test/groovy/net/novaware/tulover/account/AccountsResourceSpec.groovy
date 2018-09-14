@@ -1,5 +1,7 @@
-package net.novaware.tulover.resource
+package net.novaware.tulover.account
 
+import net.novaware.tulover.account.AccountsResource
+import net.novaware.tulover.account.AccountsResourceImpl
 import spock.lang.Specification
 
 class AccountsResourceSpec extends Specification {

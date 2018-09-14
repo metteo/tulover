@@ -1,4 +1,6 @@
-package net.novaware.tulover.resource;
+package net.novaware.tulover.account;
+
+import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -16,7 +18,7 @@ public interface AccountsResource {
   @GET
   @Path("/{number}")
   @Produces("application/vnd.novaware.tulover.account.v1+json;charset=utf8")
-  Response get(@PathParam("number") String number, @QueryParam("fields") String fields);
+  Response get(@PathParam("number") String number, @QueryParam("fields") List<String> fields);
 
   @GET
   @Path("/{number}/transfers")

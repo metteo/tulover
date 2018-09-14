@@ -1,43 +1,45 @@
 package net.novaware.tulover;
 
+import static org.eclipse.jetty.servlet.ServletContextHandler.NO_SECURITY;
+import static org.eclipse.jetty.servlet.ServletContextHandler.NO_SESSIONS;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.servlet.ServletContainer;
-
-import static org.eclipse.jetty.servlet.ServletContextHandler.*;
 
 public class Tulover implements Runnable {
 
   private static final Logger logger = Logger.getLogger("Tulover");
-
-  public static void main(String[] args) {
-    new Tulover().run();
-  }
-
+  
   @Override
   public void run() {
     ServletContextHandler servletContext = new ServletContextHandler(NO_SESSIONS | NO_SECURITY);
     servletContext.setContextPath("/");
 
-    ServletHolder jerseyServlet = servletContext.addServlet(ServletContainer.class, "/resources/*");
-    jerseyServlet.setInitParameter(ServerProperties.PROVIDER_PACKAGES, "net.novaware.tulover");
+    ServletHolder jerseyServlet = new ServletHolder(new ServletContainer(new TuloverConfig()));
+    servletContext.addServlet(jerseyServlet, "/resources/*");
 
-    Server server = new Server(8080); //TODO: read port from properties so tests can randomize it
+    Integer port = Integer.getInteger("port", 8080);
+    
+    Server server = new Server(port);
     server.setHandler(servletContext);
 
     try {
       server.start();
-      server.join();
+      server.join(); //TODO: notify waiting tests before joining
     } catch (InterruptedException ex) {
       Thread.currentThread().interrupt();
       logger.info("Interrupted. Stopping the server");
     } catch (Exception ex) {
       logger.log(Level.SEVERE, "Unable to start the server: ", ex);
     }
+  }
+  
+  public static void main(String[] args) {
+    new Tulover().run();
   }
 }

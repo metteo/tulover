@@ -1,8 +1,13 @@
-package net.novaware.tulover.resource;
+package net.novaware.tulover.account;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
+import org.mapstruct.factory.Mappers;
 
 @Path("accounts")
 public class AccountsResourceImpl implements AccountsResource {
@@ -13,22 +18,25 @@ public class AccountsResourceImpl implements AccountsResource {
     }
 
     Account account = new Account();
-    account.owner = owner;
-    account.number = "1234";
+    // account.owner = owner;
+    // account.number = "1234";
 
     return Response.ok(account).build(); // TODO: list!
   }
 
-  public Response get(String number, String fields) {
+  public Response get(String number, List<String> fields) {
     if (number == null) {
       return Response.status(Status.NOT_FOUND).build();
     }
 
-    Account account = new Account();
-    account.owner = "unknown";
-    account.number = number;
+    AccountEntity account = new AccountStoreImpl().get(number);
+    Account a = Mappers.getMapper(AccountMapper.class).toAccount(account);
 
-    return Response.ok(account).build();
+    if (fields != null && fields.contains("balance")) {
+      a.setBalance(BigDecimal.ZERO);
+    }
+
+    return Response.ok(a).build();
   }
 
   public Response getTransfers(String number) {
@@ -37,8 +45,8 @@ public class AccountsResourceImpl implements AccountsResource {
     }
 
     Account account = new Account();
-    account.owner = "unknown";
-    account.number = number;
+    // account.owner = "unknown";
+    // account.number = number;
 
     return Response.ok(account).build();
   }

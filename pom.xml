@@ -11,6 +11,7 @@
   <properties>
     <jetty.version>9.4.12.v20180830</jetty.version>
     <jersey.version>2.27</jersey.version>
+    <mapstruct.version>1.2.0.Final</mapstruct.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -47,6 +48,18 @@
     </dependency>
 
     <dependency>
+      <groupId>org.joda</groupId>
+      <artifactId>joda-money</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct-jdk8</artifactId>
+      <version>${mapstruct.version}</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.spockframework</groupId>
       <artifactId>spock-core</artifactId>
       <version>1.1-groovy-2.4</version>
@@ -65,10 +78,17 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
+        <version>3.5.1</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.mapstruct</groupId>
+              <artifactId>mapstruct-processor</artifactId>
+              <version>${mapstruct.version}</version>
+            </path>
+          </annotationProcessorPaths>
         </configuration>
       </plugin>
 
@@ -120,9 +140,10 @@
         <artifactId>maven-assembly-plugin</artifactId>
         <version>3.1.0</version>
         <configuration>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
+          <descriptors>
+            <!-- https://github.com/demobox/jar-with-deps-vs-spi/blob/master/src/main/assembly/jar-with-deps-merge-services.xml -->
+            <descriptor>src/assembly/jar-with-deps-merge-spi.xml</descriptor>
+          </descriptors>
           <archive>
             <manifest>
               <mainClass>net.novaware.tulover.Tulover</mainClass>
