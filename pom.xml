@@ -12,6 +12,7 @@
     <jetty.version>9.4.12.v20180830</jetty.version>
     <jersey.version>2.27</jersey.version>
     <mapstruct.version>1.2.0.Final</mapstruct.version>
+    <jsr305.version>3.0.2</jsr305.version> <!-- @Nullable -->
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -57,6 +58,13 @@
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct-jdk8</artifactId>
       <version>${mapstruct.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <version>${jsr305.version}</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>

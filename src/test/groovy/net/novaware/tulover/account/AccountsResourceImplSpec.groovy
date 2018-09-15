@@ -5,6 +5,7 @@ import javax.ws.rs.core.UriInfo
 
 import net.novaware.tulover.account.AccountsResource
 import net.novaware.tulover.account.AccountsResourceImpl
+import net.novaware.tulover.util.ItemHolder
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -86,11 +87,12 @@ class AccountsResourceImplSpec extends Specification {
     
     when:
     def response = instance.queryBy("test")
-    List<Account> entity = response.getEntity()
+    ItemHolder<Account> entity = response.getEntity()
 
     then:
     response.status == 200
-    entity.isEmpty()
+    entity.count == 0
+    entity.items.isEmpty()
   }
   
   def "should return '200 OK' when GETing by owner with 2 accounts"() {
@@ -101,11 +103,12 @@ class AccountsResourceImplSpec extends Specification {
     
     when:
     def response = instance.queryBy("test")
-    List<Account> entity = response.getEntity()
+    ItemHolder<Account> entity = response.getEntity()
 
     then:
     response.status == 200
-    entity.size() == 2
+    entity.count == 2
+    entity.items.size() == 2
   }
   
   def "should return '404 Not found' when GETing by wrong number"() {

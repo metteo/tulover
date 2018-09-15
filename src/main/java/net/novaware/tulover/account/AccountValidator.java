@@ -5,7 +5,7 @@ import org.joda.money.IllegalCurrencyException;
 
 public class AccountValidator {
 
-  public boolean isValid(Account account) {
+  public boolean isValidPrototype(Account account) {
     if(account == null) {
       return false;
     }
