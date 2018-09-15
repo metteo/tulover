@@ -43,7 +43,7 @@ class ManageAccountsFeature extends Specification {
     def entity = response.readEntity(Account.class);
 
     then:
-    response.getStatus() == Status.OK.getStatusCode()
-    UUID.fromString(entity.number) != null
+    response.getStatus() == Status.NO_CONTENT.getStatusCode()
+    //UUID.fromString(entity.number) != null
   }
 }

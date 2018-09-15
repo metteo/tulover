@@ -9,6 +9,7 @@ public class TuloverConfig extends ResourceConfig {
 
   public TuloverConfig() {
     packages("net.novaware.tulover");
+    register(new TuloverBinder());
   }
   
 }

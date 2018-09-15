@@ -12,17 +12,29 @@ class TransferEntitySpec extends Specification {
     def split1 = new SplitEntity(id:randomUUID())
     def split2 = new SplitEntity(id:randomUUID())
 
-    def transfer = new TransferEntity(id:randomUUID(), splits:asList(split1, split2))
+    def transfer1 = new TransferEntity(id:randomUUID()) // null splits
+    def transfer2 = transfer1.clone();                  // 2 splits
+    
+    transfer2.setSplits(asList(split1, split2)); 
 
     when:
-    def clone = transfer.clone()
+    def clone1 = transfer1.clone()
+    def clone2 = transfer2.clone();
     
     then:
-    clone == transfer
+    clone1 == transfer1
+    clone2 == transfer2
     
-    !clone.is(transfer)
-    !clone.splits.is(transfer.splits)
-    !clone.splits[0].is(transfer.splits[0])
-    !clone.splits[1].is(transfer.splits[1])
+    !transfer1.is(transfer2)
+    !clone1.is(transfer1)
+    !clone2.is(transfer2)
+    
+    clone1.splits == null
+    
+    !clone2.splits.is(transfer2.splits)
+    !clone2.splits[0].is(transfer2.splits[0])
+    !clone2.splits[1].is(transfer2.splits[1])
+    
+    notThrown(NullPointerException.class)
   }
 }
