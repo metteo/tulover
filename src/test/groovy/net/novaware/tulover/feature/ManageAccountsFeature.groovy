@@ -40,10 +40,11 @@ class ManageAccountsFeature extends Specification {
 
     when:
     def response = accountsRes.get("123", null);
-    def entity = response.readEntity(Account.class);
 
     then:
     response.getStatus() == Status.NOT_FOUND.getStatusCode()
+    
+    //def entity = response.readEntity(Account.class);
     //UUID.fromString(entity.number) != null
   }
 }

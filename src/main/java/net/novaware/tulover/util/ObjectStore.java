@@ -6,5 +6,7 @@ package net.novaware.tulover.util;
  */
 public interface ObjectStore<T, I> {
 
+  T create(T object);
+  
   T get(I id);
 }

@@ -1,5 +1,6 @@
 package net.novaware.tulover.account;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.mapstruct.Mapper;
@@ -20,4 +21,6 @@ public abstract class AccountMapper {
   protected String toString(UUID number) {
     return number.toString();
   }
+
+  public abstract List<Account> toAccounts(List<AccountEntity> entities);
 }

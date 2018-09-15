@@ -11,6 +11,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
+import net.novaware.tulover.transfer.Transfer;
+
 public interface AccountsResource {
 
   @POST
@@ -29,6 +31,6 @@ public interface AccountsResource {
   
   @GET
   @Path("/{number}/transfers")
-  @Produces(Account.MEDIA_TYPE_JSON_UTF8)
+  @Produces(Transfer.MEDIA_TYPE_JSON_UTF8)
   Response getTransfers(@PathParam("number") String number);
 }
