@@ -39,16 +39,36 @@ public class AccountsResourceImpl implements AccountsResource {
 
   @Override
   public Response queryBy(String owner) {
-    return null;
+    if (owner == null || owner.isEmpty()) {
+      return Response.status(Status.BAD_REQUEST).build();
+    }
+    
+    List<Account> accounts = repository.queryBy(owner);
+    assert accounts != null : "account list should be empty if no results";
+    
+    return Response.ok(accounts).build();
   }
 
   @Override
   public Response get(String number, List<String> fields) {
-    return null;
+    assert number != null && !number.isEmpty() : "number should be given";
+    
+    boolean withBalance = false;
+    if (fields != null && !fields.isEmpty()) {
+      withBalance = fields.contains("balance");
+    }
+    
+    Account account = repository.get(number, withBalance);
+    
+    if(account == null) {
+      return Response.status(Status.NOT_FOUND).build();
+    }
+    
+    return Response.ok(account).build();
   }
 
   @Override
   public Response getTransfers(String number) {
-    return null;
+    return Response.status(Status.NOT_IMPLEMENTED).build();
   }
 }

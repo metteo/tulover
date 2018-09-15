@@ -70,4 +70,79 @@ class AccountsResourceImplSpec extends Specification {
       balance == 0g
     }
   }
+  
+  def "should return '400 Bad request' when GETing list without owner"() {
+    when:
+    def response = instance.queryBy(null)
+    List<Account> entity = response.getEntity()
+
+    then:
+    response.status == 400
+  }
+  
+  def "should return '200 OK' when GETing by owner without accounts"() {
+    given:
+    repo.queryBy("test") >> new ArrayList();
+    
+    when:
+    def response = instance.queryBy("test")
+    List<Account> entity = response.getEntity()
+
+    then:
+    response.status == 200
+    entity.isEmpty()
+  }
+  
+  def "should return '200 OK' when GETing by owner with 2 accounts"() {
+    given:
+    def acc1 = new Account();
+    def acc2 = new Account();
+    repo.queryBy("test") >> [acc1, acc2];
+    
+    when:
+    def response = instance.queryBy("test")
+    List<Account> entity = response.getEntity()
+
+    then:
+    response.status == 200
+    entity.size() == 2
+  }
+  
+  def "should return '404 Not found' when GETing by wrong number"() {
+    when:
+    def response = instance.get(UUID.randomUUID().toString(), null)
+    
+    then:
+    response.status == 404
+  }
+  
+  def "should return '200 OK' when GETing by correct number"() {
+    given:
+    def number = UUID.randomUUID().toString()
+    def account = new Account()
+    
+    repo.get(number, false) >> account
+    
+    when:
+    def response = instance.get(number, null)
+    
+    then:
+    response.status == 200
+    response.getEntity().is(account)
+  }
+  
+  def "should return '200 OK' when GETing by correct number with balance"() {
+    given:
+    def number = UUID.randomUUID().toString()
+    def account = new Account()
+    
+    repo.get(number, true) >> account
+    
+    when:
+    def response = instance.get(number, ["balance"])
+    
+    then:
+    response.status == 200
+    response.getEntity().is(account)
+  }
 }
