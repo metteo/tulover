@@ -21,13 +21,14 @@ class ManageAccountsFeature extends Specification {
   Tulover tulover
 
   @Shared 
-  AccountsResource accountsResource;
+  AccountsResource accountsResource
 
   def setupSpec() {
-    tulover = new Tulover().start();
+    int port = 11111
+    tulover = new Tulover().start(port)
 
     def target = ClientBuilder.newClient()
-        .target("http://localhost:8080/")
+        .target("http://localhost:$port/")
         .path("resources")
         .path("accounts")
 
@@ -56,13 +57,13 @@ class ManageAccountsFeature extends Specification {
     bobPln = create(bobPln)
     bobGbp = create(bobGbp)
     
-    def aliceAllResp = accountsResource.queryBy(alice);
+    def aliceAllResp = accountsResource.queryBy(alice)
     
     def bobPln2Resp = accountsResource.get(bobPln.number, null)
 
     then:
     aliceAllResp.getStatus() == Status.OK.getStatusCode()
-    def aliceAll = aliceAllResp.readEntity(new GenericType<ItemHolder<Account>>() {});
+    def aliceAll = aliceAllResp.readEntity(new GenericType<ItemHolder<Account>>(){})
     aliceUsd == aliceAll.items[0]
     aliceEur == aliceAll.items[1]
     

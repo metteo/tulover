@@ -15,16 +15,16 @@ public class Tulover {
 
   private static final Logger logger = Logger.getLogger("Tulover");
   
+  public static final int DEFAULT_PORT = 8080;
+  
   private Server server;
   
-  public Tulover start() {
+  public Tulover start(int port) {
     ServletContextHandler servletContext = new ServletContextHandler(NO_SESSIONS | NO_SECURITY);
     servletContext.setContextPath("/");
 
     ServletHolder jerseyServlet = new ServletHolder(new ServletContainer(new TuloverConfig()));
     servletContext.addServlet(jerseyServlet, "/resources/*");
-
-    Integer port = Integer.getInteger("port", 8080);
     
     server = new Server(port);
     server.setHandler(servletContext);
@@ -60,6 +60,7 @@ public class Tulover {
   }
   
   public static void main(String[] args) {
-    new Tulover().start().join();
+    int port = Integer.getInteger("port", DEFAULT_PORT);
+    new Tulover().start(port).join();
   }
 }

@@ -3,6 +3,11 @@ package net.novaware.tulover.transfer;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+
 /**
  * Transfer representation (a structure, not action)
  */
@@ -13,8 +18,9 @@ public class Transfer implements Cloneable {
   public static final String MEDIA_TYPE_JSON_UTF8 = MEDIA_TYPE_JSON + ";charset=utf8";
 
   private String id;
+  @JsonSerialize(using = ToStringSerializer.class)
+  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
   private LocalDateTime createdAt;
-  private String createdBy;
   private String from;
   private String to;
   private BigDecimal amount;
@@ -33,14 +39,6 @@ public class Transfer implements Cloneable {
 
   public void setCreatedAt(LocalDateTime createdAt) {
     this.createdAt = createdAt;
-  }
-
-  public String getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
   }
 
   public String getFrom() {
@@ -83,7 +81,6 @@ public class Transfer implements Cloneable {
     int result = 1;
     result = prime * result + ((amount == null) ? 0 : amount.hashCode());
     result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
-    result = prime * result + ((createdBy == null) ? 0 : createdBy.hashCode());
     result = prime * result + ((from == null) ? 0 : from.hashCode());
     result = prime * result + ((id == null) ? 0 : id.hashCode());
     result = prime * result + ((to == null) ? 0 : to.hashCode());
@@ -109,11 +106,6 @@ public class Transfer implements Cloneable {
         return false;
     } else if (!createdAt.equals(other.createdAt))
       return false;
-    if (createdBy == null) {
-      if (other.createdBy != null)
-        return false;
-    } else if (!createdBy.equals(other.createdBy))
-      return false;
     if (from == null) {
       if (other.from != null)
         return false;
@@ -134,7 +126,7 @@ public class Transfer implements Cloneable {
 
   @Override
   public String toString() {
-    return "Transfer [id=" + id + ", createdAt=" + createdAt + ", createdBy=" + createdBy + ", from=" + from + ", to="
+    return "Transfer [id=" + id + ", createdAt=" + createdAt + ", from=" + from + ", to="
         + to + ", amount=" + amount + "]";
   }
 }

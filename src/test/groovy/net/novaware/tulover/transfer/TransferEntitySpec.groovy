@@ -9,8 +9,8 @@ class TransferEntitySpec extends Specification {
 
   def "should deeply clone splits" () {
     given:
-    def split1 = new SplitEntity(id:randomUUID())
-    def split2 = new SplitEntity(id:randomUUID())
+    def split1 = new SplitEntity(account:randomUUID())
+    def split2 = new SplitEntity(account:randomUUID())
 
     def transfer1 = new TransferEntity(id:randomUUID()) // null splits
     def transfer2 = transfer1.clone();                  // 2 splits

@@ -12,7 +12,6 @@ public class TransferEntity implements Cloneable {
 
   private UUID id;
   private LocalDateTime createdAt;
-  private String createdBy;
 
   private List<SplitEntity> splits;
 
@@ -30,14 +29,6 @@ public class TransferEntity implements Cloneable {
 
   public void setCreatedAt(LocalDateTime createdAt) {
     this.createdAt = createdAt;
-  }
-
-  public String getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
   }
 
   public List<SplitEntity> getSplits() {
@@ -69,7 +60,6 @@ public class TransferEntity implements Cloneable {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
-    result = prime * result + ((createdBy == null) ? 0 : createdBy.hashCode());
     result = prime * result + ((id == null) ? 0 : id.hashCode());
     result = prime * result + ((splits == null) ? 0 : splits.hashCode());
     return result;
@@ -89,11 +79,6 @@ public class TransferEntity implements Cloneable {
         return false;
     } else if (!createdAt.equals(other.createdAt))
       return false;
-    if (createdBy == null) {
-      if (other.createdBy != null)
-        return false;
-    } else if (!createdBy.equals(other.createdBy))
-      return false;
     if (id == null) {
       if (other.id != null)
         return false;
@@ -109,7 +94,7 @@ public class TransferEntity implements Cloneable {
 
   @Override
   public String toString() {
-    return "TransferEntity [id=" + id + ", createdAt=" + createdAt + ", createdBy=" + createdBy + ", splits=" + splits
+    return "TransferEntity [id=" + id + ", createdAt=" + createdAt + ", splits=" + splits
         + "]";
   }
 

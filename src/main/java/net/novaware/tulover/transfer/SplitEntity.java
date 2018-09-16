@@ -14,17 +14,8 @@ import java.util.UUID;
  */
 public class SplitEntity implements Cloneable {
 
-  private UUID id;
   private UUID account;
   private BigDecimal amount;
-
-  public UUID getId() {
-    return id;
-  }
-
-  public void setId(UUID id) {
-    this.id = id;
-  }
 
   public UUID getAccount() {
     return account;
@@ -58,7 +49,6 @@ public class SplitEntity implements Cloneable {
     int result = 1;
     result = prime * result + ((account == null) ? 0 : account.hashCode());
     result = prime * result + ((amount == null) ? 0 : amount.hashCode());
-    result = prime * result + ((id == null) ? 0 : id.hashCode());
     return result;
   }
 
@@ -81,17 +71,12 @@ public class SplitEntity implements Cloneable {
         return false;
     } else if (!amount.equals(other.amount))
       return false;
-    if (id == null) {
-      if (other.id != null)
-        return false;
-    } else if (!id.equals(other.id))
-      return false;
     return true;
   }
 
   @Override
   public String toString() {
-    return "SplitEntity [id=" + id + ", account=" + account + ", amount=" + amount + "]";
+    return "SplitEntity [account=" + account + ", amount=" + amount + "]";
   }
 
 }
