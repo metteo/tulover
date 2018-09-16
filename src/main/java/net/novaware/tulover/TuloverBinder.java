@@ -11,6 +11,9 @@ import net.novaware.tulover.account.AccountRepositoryImpl;
 import net.novaware.tulover.account.AccountStore;
 import net.novaware.tulover.account.AccountStoreImpl;
 import net.novaware.tulover.account.AccountValidator;
+import net.novaware.tulover.transfer.TransferService;
+import net.novaware.tulover.transfer.TransferServiceImpl;
+import net.novaware.tulover.transfer.TransferValidator;
 
 public class TuloverBinder extends AbstractBinder {
 
@@ -19,6 +22,9 @@ public class TuloverBinder extends AbstractBinder {
     bind(AccountStoreImpl.class).to(AccountStore.class).in(Singleton.class);
     bind(AccountRepositoryImpl.class).to(AccountRepository.class);
     bind(AccountValidator.class).to(AccountValidator.class);
+    
+    bind(TransferServiceImpl.class).to(TransferService.class);
+    bind(TransferValidator.class).to(TransferValidator.class);
     
     AccountMapper mapper = Mappers.getMapper(AccountMapper.class);
     bind(mapper).to(AccountMapper.class).in(Singleton.class);
