@@ -11,12 +11,13 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.servlet.ServletContainer;
 
-public class Tulover implements Runnable {
+public class Tulover {
 
   private static final Logger logger = Logger.getLogger("Tulover");
   
-  @Override
-  public void run() {
+  private Server server;
+  
+  public Tulover start() {
     ServletContextHandler servletContext = new ServletContextHandler(NO_SESSIONS | NO_SECURITY);
     servletContext.setContextPath("/");
 
@@ -25,21 +26,40 @@ public class Tulover implements Runnable {
 
     Integer port = Integer.getInteger("port", 8080);
     
-    Server server = new Server(port);
+    server = new Server(port);
     server.setHandler(servletContext);
 
     try {
       server.start();
-      server.join(); //TODO: notify waiting tests before joining
-    } catch (InterruptedException ex) {
-      Thread.currentThread().interrupt();
-      logger.info("Interrupted. Stopping the server");
     } catch (Exception ex) {
+      server = null;
       logger.log(Level.SEVERE, "Unable to start the server: ", ex);
+    }
+    
+    return this;
+  }
+  
+  public void join() {
+    try {
+      if(server != null) {
+        server.join();
+      }
+    } catch (InterruptedException e) {
+      logger.log(Level.WARNING, "Interrupted while joining: ", e);
+    }
+  }
+  
+  public void stop() {
+    if(server != null) {
+      try {
+        server.stop();
+      } catch (Exception e) {
+        logger.log(Level.WARNING, "Error while stopping: ", e);
+      }
     }
   }
   
   public static void main(String[] args) {
-    new Tulover().run();
+    new Tulover().start().join();
   }
 }

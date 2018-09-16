@@ -18,14 +18,13 @@ import spock.lang.Specification
 class ManageAccountsFeature extends Specification {
 
   @Shared
-  Thread tulover
+  Tulover tulover
 
   @Shared 
   AccountsResource accountsResource;
 
   def setupSpec() {
-    tulover = new Thread(new Tulover());
-    tulover.start();
+    tulover = new Tulover().start();
 
     def target = ClientBuilder.newClient()
         .target("http://localhost:8080/")
@@ -34,12 +33,10 @@ class ManageAccountsFeature extends Specification {
 
     accountsResource = WebResourceFactory.newResource(AccountsResource.class,
         target)
-
-    Thread.sleep(1000L) //wait for jetty to start, TODO: don't use separate thread with join
   }
 
   def cleanupSpec() {
-    tulover.interrupt();
+    tulover.stop();
   }
 
   //scenario
