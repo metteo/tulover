@@ -11,10 +11,10 @@ import spock.lang.Unroll
 
 class AccountsResourceImplSpec extends Specification {
 
-  AccountRepository repo = Mock()
+  AccountService service = Mock()
   UriInfo uriInfo = Mock()
 
-  AccountsResource instance = new AccountsResourceImpl(repo, new AccountValidator(), uriInfo)
+  AccountsResource instance = new AccountsResourceImpl(service, new AccountValidator(), uriInfo)
 
   def "should return '400 Bad request' when POSTing with empty body"() {
     when:
@@ -53,7 +53,7 @@ class AccountsResourceImplSpec extends Specification {
     created.number = UUID.randomUUID()
     created.balance = 0g;
     
-    repo.create(_) >> created
+    service.create(_) >> created
     uriInfo.getAbsolutePathBuilder() >> UriBuilder.newInstance().uri("http://host:1234/a/b")
     
     
@@ -83,7 +83,7 @@ class AccountsResourceImplSpec extends Specification {
   
   def "should return '200 OK' when GETing by owner without accounts"() {
     given:
-    repo.queryBy("test") >> new ArrayList();
+    service.queryBy("test") >> new ArrayList();
     
     when:
     def response = instance.queryBy("test")
@@ -99,7 +99,7 @@ class AccountsResourceImplSpec extends Specification {
     given:
     def acc1 = new Account();
     def acc2 = new Account();
-    repo.queryBy("test") >> [acc1, acc2];
+    service.queryBy("test") >> [acc1, acc2];
     
     when:
     def response = instance.queryBy("test")
@@ -124,7 +124,7 @@ class AccountsResourceImplSpec extends Specification {
     def number = UUID.randomUUID().toString()
     def account = new Account()
     
-    repo.get(number, false) >> account
+    service.get(number, false) >> account
     
     when:
     def response = instance.get(number, null)
@@ -139,7 +139,7 @@ class AccountsResourceImplSpec extends Specification {
     def number = UUID.randomUUID().toString()
     def account = new Account()
     
-    repo.get(number, true) >> account
+    service.get(number, true) >> account
     
     when:
     def response = instance.get(number, ["balance"])

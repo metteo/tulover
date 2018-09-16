@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
-public class AccountRepositoryImpl implements AccountRepository {
+public class AccountServiceImpl implements AccountService {
   
   private static final Logger logger = Logger.getLogger("AccountRepositoryImpl");
   
@@ -19,11 +19,11 @@ public class AccountRepositoryImpl implements AccountRepository {
   private Supplier<UUID> uuidGenerator;
 
   @Inject
-  public AccountRepositoryImpl(AccountStore store, AccountMapper mapper) {
+  public AccountServiceImpl(AccountStore store, AccountMapper mapper) {
     this(store, mapper, UUID::randomUUID);
   }
   
-  public AccountRepositoryImpl(AccountStore store, AccountMapper mapper, Supplier<UUID> uuidGenerator) {
+  public AccountServiceImpl(AccountStore store, AccountMapper mapper, Supplier<UUID> uuidGenerator) {
     this.store = store;
     this.mapper = mapper;
     this.uuidGenerator = uuidGenerator;

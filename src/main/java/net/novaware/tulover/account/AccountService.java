@@ -2,7 +2,7 @@ package net.novaware.tulover.account;
 
 import java.util.List;
 
-public interface AccountRepository {
+public interface AccountService {
 
   Account create(Account prototype);
 

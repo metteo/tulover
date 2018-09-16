@@ -6,7 +6,7 @@ import org.mapstruct.factory.Mappers
 
 import spock.lang.Specification
 
-class AccountRepositoryImplSpec extends Specification {
+class AccountServiceImplSpec extends Specification {
   
   AccountStore store = Mock()
   
@@ -14,7 +14,7 @@ class AccountRepositoryImplSpec extends Specification {
   
   AccountMapper mapper = Mappers.getMapper(AccountMapper.class);
   
-  AccountRepository instance = new AccountRepositoryImpl(store, mapper, uuidGenerator)
+  AccountService instance = new AccountServiceImpl(store, mapper, uuidGenerator)
   
   def "should create new account in store"() {
     given:

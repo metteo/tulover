@@ -17,13 +17,13 @@ public class AccountsResourceImpl implements AccountsResource {
   
   private static final Logger logger = Logger.getLogger("AccountsResourceImpl");
 
-  private AccountRepository repository;
+  private AccountService service;
   private AccountValidator validator;
   private UriInfo uriInfo;
 
   @Inject
-  public AccountsResourceImpl(AccountRepository repository, AccountValidator validator, UriInfo uriInfo) {
-    this.repository = repository;
+  public AccountsResourceImpl(AccountService service, AccountValidator validator, UriInfo uriInfo) {
+    this.service = service;
     this.validator = validator;
     this.uriInfo = uriInfo;
   }
@@ -36,8 +36,8 @@ public class AccountsResourceImpl implements AccountsResource {
       return Response.status(Status.BAD_REQUEST).build();
     }
     
-    Account created = repository.create(prototype); //TODO: handle throw case if needed
-    assert created != null : "repo should return or throw";
+    Account created = service.create(prototype); //TODO: handle throw case if needed
+    assert created != null : "service should return or throw";
     
     URI link = uriInfo.getAbsolutePathBuilder().path(created.getNumber()).build();
 
@@ -52,7 +52,7 @@ public class AccountsResourceImpl implements AccountsResource {
       return Response.status(Status.BAD_REQUEST).build();
     }
     
-    List<Account> accounts = repository.queryBy(owner);
+    List<Account> accounts = service.queryBy(owner);
     assert accounts != null : "account list should be empty if no results";
     
     return Response.ok(new ItemHolder<>(accounts)).build();
@@ -69,7 +69,7 @@ public class AccountsResourceImpl implements AccountsResource {
       withBalance = fields.contains("balance");
     }
     
-    Account account = repository.get(number, withBalance);
+    Account account = service.get(number, withBalance);
     
     if(account == null) {
       return Response.status(Status.NOT_FOUND).build();
