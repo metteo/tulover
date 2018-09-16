@@ -43,10 +43,10 @@ public class TransfersResourceImpl implements TransfersResource {
   }
 
   @Override
-  public Response getAll() {
-    logger.severe("getAll endpoint is only for debugging !!1one");
+  public Response queryAll() {
+    logger.severe("queryAll endpoint is only for debugging !!1one");
     
-    List<Transfer> transfers = service.getAll();
+    List<Transfer> transfers = service.queryAll();
     assert transfers != null : "should return empty list or throw";
     
     return Response.ok(new ItemHolder<>(transfers)).build();

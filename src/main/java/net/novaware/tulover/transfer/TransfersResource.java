@@ -21,7 +21,7 @@ public interface TransfersResource {
    */
   @GET
   @Produces(Transfer.MEDIA_TYPE_JSON_UTF8)
-  Response getAll();
+  Response queryAll();
   
   @GET
   @Path("/{id}")

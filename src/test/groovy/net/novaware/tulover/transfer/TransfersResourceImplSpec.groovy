@@ -49,10 +49,10 @@ class TransfersResourceImplSpec extends Specification {
     given:
     def transfers = [new Transfer(), new Transfer()]
     
-    service.getAll() >> transfers
+    service.queryAll() >> transfers
     
     when:
-    def response = instance.getAll()
+    def response = instance.queryAll()
     
     then:
     response.status == 200

@@ -11,7 +11,7 @@ public class TransferServiceImpl implements TransferService {
   }
 
   @Override
-  public List<Transfer> getAll() {
+  public List<Transfer> queryAll() {
     // TODO Auto-generated method stub
     return null;
   }

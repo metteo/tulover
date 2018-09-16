@@ -6,7 +6,7 @@ public interface TransferService {
 
   Transfer create(Transfer prototype);
   
-  List<Transfer> getAll();
+  List<Transfer> queryAll();
   
   Transfer get(String id);
 }
