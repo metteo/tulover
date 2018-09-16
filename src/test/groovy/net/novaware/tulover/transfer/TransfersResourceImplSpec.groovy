@@ -52,7 +52,7 @@ class TransfersResourceImplSpec extends Specification {
     service.queryAll() >> transfers
     
     when:
-    def response = instance.queryAll()
+    def response = instance.queryBy(null)
     
     then:
     response.status == 200

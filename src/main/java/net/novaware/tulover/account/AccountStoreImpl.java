@@ -65,6 +65,8 @@ public class AccountStoreImpl extends AbstractObjectStore<AccountEntity, UUID> i
       List<AccountEntity> fromStorage = byOwnerIndex.get(owner);
       if (fromStorage != null) {
         entities = fromStorage.stream().map(AccountEntity::clone).collect(Collectors.toList());
+      } else {
+        entities = new ArrayList<>();
       }
     } finally {
       main.readLock().unlock();

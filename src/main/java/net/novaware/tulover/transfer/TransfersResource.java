@@ -6,6 +6,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 public interface TransfersResource {
@@ -14,14 +15,10 @@ public interface TransfersResource {
   @Consumes(Transfer.MEDIA_TYPE_JSON_UTF8)
   @Produces(Transfer.MEDIA_TYPE_JSON_UTF8)
   Response create(Transfer prototype);
-
-  /**
-   * Debug endpoint to view the general ledger
-   * @return
-   */
+  
   @GET
   @Produces(Transfer.MEDIA_TYPE_JSON_UTF8)
-  Response queryAll();
+  Response queryBy(@QueryParam("account") String account);
   
   @GET
   @Path("/{id}")

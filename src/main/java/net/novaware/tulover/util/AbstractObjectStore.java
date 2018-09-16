@@ -1,6 +1,6 @@
 package net.novaware.tulover.util;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -17,7 +17,7 @@ public abstract class AbstractObjectStore<T, I> implements ObjectStore<T, I> {
   protected AbstractObjectStore() {
     main = new ReentrantReadWriteLock(true);
 
-    storage = new HashMap<>();
+    storage = new LinkedHashMap<>(); //so transfers are in insert order
   }
   
   protected abstract T clone(T object);

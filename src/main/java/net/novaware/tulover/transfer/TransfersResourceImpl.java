@@ -43,10 +43,17 @@ public class TransfersResourceImpl implements TransfersResource {
   }
 
   @Override
-  public Response queryAll() {
-    logger.severe("queryAll endpoint is only for debugging !!1one");
+  public Response queryBy(String account) {
     
-    List<Transfer> transfers = service.queryAll();
+    
+    List<Transfer> transfers;
+    if (account == null || account.isEmpty()) {
+      logger.severe("queryAll endpoint is only for debugging !!1one");
+      transfers = service.queryAll();
+    } else {
+      transfers = service.queryBy(account);
+    }
+    
     assert transfers != null : "should return empty list or throw";
     
     return Response.ok(new ItemHolder<>(transfers)).build();

@@ -57,6 +57,12 @@ class TransferMoneyFeature extends Specification {
     createdResp.status == 201
     def created = createdResp.readEntity(Transfer.class)
     created != null
+    
+    and:
+    def aliceUsdResp = accountsResource.get(aliceUsd.number, ["balance"])
+    def aliceUsdBal = aliceUsdResp.readEntity(Account.class)
+    aliceUsdResp.status == 200
+    aliceUsdBal.balance == -123.45g
   }
   
   Account create(Account account) {

@@ -8,5 +8,7 @@ public interface TransferService {
   
   List<Transfer> queryAll();
   
+  List<Transfer> queryBy(String account);
+  
   Transfer get(String id);
 }

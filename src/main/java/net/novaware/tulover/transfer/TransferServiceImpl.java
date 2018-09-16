@@ -49,4 +49,9 @@ public class TransferServiceImpl implements TransferService {
     return mapper.toTransfer(entity);
   }
 
+  @Override
+  public List<Transfer> queryBy(String account) {
+    return store.queryBy(UUID.fromString(account)).stream().map(mapper::toTransfer).collect(Collectors.toList());
+  }
+
 }
