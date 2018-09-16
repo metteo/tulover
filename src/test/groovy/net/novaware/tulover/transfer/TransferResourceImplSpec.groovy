@@ -3,7 +3,7 @@ package net.novaware.tulover.transfer
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class TransferResourcesImplSpec extends Specification {
+class TransferResourceImplSpec extends Specification {
 
   TransferValidator validator = Mock();
   
