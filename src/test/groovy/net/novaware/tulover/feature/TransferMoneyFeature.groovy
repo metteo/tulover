@@ -6,10 +6,10 @@ import javax.ws.rs.core.Response.Status
 import org.glassfish.jersey.client.proxy.WebResourceFactory
 
 import net.novaware.tulover.Tulover
-import net.novaware.tulover.account.Account
-import net.novaware.tulover.account.AccountsResource
-import net.novaware.tulover.transfer.Transfer
-import net.novaware.tulover.transfer.TransfersResource
+import net.novaware.tulover.api.Account
+import net.novaware.tulover.api.AccountsResource
+import net.novaware.tulover.api.Transfer
+import net.novaware.tulover.api.TransfersResource
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -63,6 +63,8 @@ class TransferMoneyFeature extends Specification {
     def aliceUsdBal = aliceUsdResp.readEntity(Account.class)
     aliceUsdResp.status == 200
     aliceUsdBal.balance == -123.45g
+    
+    // TODO: read transfers for account
   }
   
   Account create(Account account) {

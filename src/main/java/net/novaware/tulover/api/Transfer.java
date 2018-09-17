@@ -1,4 +1,4 @@
-package net.novaware.tulover.transfer;
+package net.novaware.tulover.api;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -18,9 +18,11 @@ public class Transfer implements Cloneable {
   public static final String MEDIA_TYPE_JSON_UTF8 = MEDIA_TYPE_JSON + ";charset=utf8";
 
   private String id;
+  
   @JsonSerialize(using = ToStringSerializer.class)
   @JsonDeserialize(using = LocalDateTimeDeserializer.class)
   private LocalDateTime createdAt;
+  
   private String from;
   private String to;
   private BigDecimal amount;

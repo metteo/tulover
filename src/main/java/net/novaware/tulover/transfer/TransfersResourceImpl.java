@@ -10,9 +10,11 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import net.novaware.tulover.util.ItemHolder;
+import net.novaware.tulover.api.ItemHolder;
+import net.novaware.tulover.api.Transfer;
+import net.novaware.tulover.api.TransfersResource;
 
-@Path("transfers")
+@Path(TransfersResource.PATH)
 public class TransfersResourceImpl implements TransfersResource {
   
   private static final Logger logger = Logger.getLogger("TransfersResourceImpl");

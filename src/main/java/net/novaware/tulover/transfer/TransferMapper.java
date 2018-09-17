@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.UUID;
 
+import net.novaware.tulover.api.Transfer;
+
 public class TransferMapper {
 
   public TransferEntity toTransferEntity(Transfer input) {

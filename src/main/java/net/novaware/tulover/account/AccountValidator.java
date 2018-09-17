@@ -3,6 +3,8 @@ package net.novaware.tulover.account;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.IllegalCurrencyException;
 
+import net.novaware.tulover.api.Account;
+
 public class AccountValidator {
 
   public boolean isValidPrototype(Account account) {

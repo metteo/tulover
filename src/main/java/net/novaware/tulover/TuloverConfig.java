@@ -8,7 +8,9 @@ import javax.ws.rs.ApplicationPath;
 import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
-@ApplicationPath("/resources")
+import net.novaware.tulover.api.RootResource;
+
+@ApplicationPath("/" + RootResource.PATH)
 public class TuloverConfig extends ResourceConfig {
 
   public TuloverConfig() {

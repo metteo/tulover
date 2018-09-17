@@ -11,6 +11,8 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.servlet.ServletContainer;
 
+import net.novaware.tulover.api.RootResource;
+
 public class Tulover {
 
   private static final Logger logger = Logger.getLogger("Tulover");
@@ -24,7 +26,7 @@ public class Tulover {
     servletContext.setContextPath("/");
 
     ServletHolder jerseyServlet = new ServletHolder(new ServletContainer(new TuloverConfig()));
-    servletContext.addServlet(jerseyServlet, "/resources/*");
+    servletContext.addServlet(jerseyServlet, "/" + RootResource.PATH + "/*");
     
     server = new Server(port);
     server.setHandler(servletContext);

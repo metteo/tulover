@@ -9,9 +9,9 @@ import javax.ws.rs.core.Response.StatusType
 import org.glassfish.jersey.client.proxy.WebResourceFactory
 
 import net.novaware.tulover.Tulover
-import net.novaware.tulover.account.Account
-import net.novaware.tulover.account.AccountsResource
-import net.novaware.tulover.util.ItemHolder
+import net.novaware.tulover.api.Account
+import net.novaware.tulover.api.AccountsResource
+import net.novaware.tulover.api.ItemHolder
 import spock.lang.Shared
 import spock.lang.Specification
 

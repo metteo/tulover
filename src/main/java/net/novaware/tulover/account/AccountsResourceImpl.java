@@ -10,10 +10,13 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import net.novaware.tulover.api.Account;
+import net.novaware.tulover.api.AccountsResource;
+import net.novaware.tulover.api.ItemHolder;
+import net.novaware.tulover.api.TransfersResource;
 import net.novaware.tulover.transfer.TransfersResourceImpl;
-import net.novaware.tulover.util.ItemHolder;
 
-@Path("accounts")
+@Path(AccountsResource.PATH)
 public class AccountsResourceImpl implements AccountsResource {
 
   private static final Logger logger = Logger.getLogger("AccountsResourceImpl");
@@ -81,7 +84,8 @@ public class AccountsResourceImpl implements AccountsResource {
 
   @Override
   public Response getTransfers(String number) {
-    URI uri = uriInfo.getBaseUriBuilder().path(TransfersResourceImpl.class).queryParam("account", number).build();
+    URI uri = uriInfo.getBaseUriBuilder().path(TransfersResourceImpl.class)
+        .queryParam(TransfersResource.ACCOUNT, number).build();
     return Response.temporaryRedirect(uri).build();
   }
 }

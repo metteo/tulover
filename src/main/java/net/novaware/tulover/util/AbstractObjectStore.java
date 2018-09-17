@@ -17,7 +17,7 @@ public abstract class AbstractObjectStore<T, I> implements ObjectStore<T, I> {
   protected AbstractObjectStore() {
     main = new ReentrantReadWriteLock(true);
 
-    storage = new LinkedHashMap<>(); //so transfers are in insert order
+    storage = new LinkedHashMap<>(); // so transfers are in insert order
   }
   
   protected abstract T clone(T object);

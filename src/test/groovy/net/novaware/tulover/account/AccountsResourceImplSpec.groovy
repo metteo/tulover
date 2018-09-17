@@ -3,9 +3,10 @@ package net.novaware.tulover.account
 import javax.ws.rs.core.UriBuilder
 import javax.ws.rs.core.UriInfo
 
-import net.novaware.tulover.account.AccountsResource
 import net.novaware.tulover.account.AccountsResourceImpl
-import net.novaware.tulover.util.ItemHolder
+import net.novaware.tulover.api.Account
+import net.novaware.tulover.api.AccountsResource
+import net.novaware.tulover.api.ItemHolder
 import spock.lang.Specification
 import spock.lang.Unroll
 

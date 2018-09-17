@@ -3,7 +3,9 @@ package net.novaware.tulover.transfer
 import javax.ws.rs.core.UriBuilder
 import javax.ws.rs.core.UriInfo
 
-import net.novaware.tulover.util.ItemHolder
+import net.novaware.tulover.api.ItemHolder
+import net.novaware.tulover.api.Transfer
+import net.novaware.tulover.api.TransfersResource
 import spock.lang.Specification
 
 class TransfersResourceImplSpec extends Specification {

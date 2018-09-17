@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
+import net.novaware.tulover.api.Transfer;
+
 public class TransferServiceImpl implements TransferService {
   
   private TransferStore store;
@@ -22,8 +24,8 @@ public class TransferServiceImpl implements TransferService {
   public Transfer create(Transfer prototype) {
     assert prototype != null : "transfer should not be null";
     
-    //TODO: validate from and to exist and same currency
-    //TODO: validate amount against above currency (num of decimal places etc)
+    //TODO: maybe validate from and to accounts exist and have same currency
+    //TODO: maybe validate amount against above currency (num of decimal places etc)
     
     TransferEntity transfer = mapper.toTransferEntity(prototype);
     transfer.setId(UUID.randomUUID());

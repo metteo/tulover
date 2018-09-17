@@ -2,6 +2,8 @@ package net.novaware.tulover.transfer;
 
 import java.math.BigDecimal;
 
+import net.novaware.tulover.api.Transfer;
+
 public class TransferValidator {
 
   public boolean isValidPrototype(Transfer transfer) {

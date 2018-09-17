@@ -1,6 +1,8 @@
 package net.novaware.tulover.account
 
 import java.util.function.Supplier
+
+import net.novaware.tulover.api.Account
 import net.novaware.tulover.transfer.TransferStore
 import org.mapstruct.factory.Mappers
 

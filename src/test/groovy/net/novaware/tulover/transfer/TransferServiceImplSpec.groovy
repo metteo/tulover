@@ -1,6 +1,8 @@
 package net.novaware.tulover.transfer
 
 import static java.util.UUID.*
+
+import net.novaware.tulover.api.Transfer
 import spock.lang.Specification
 
 class TransferServiceImplSpec extends Specification {

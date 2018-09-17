@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
+import net.novaware.tulover.api.Account;
 import net.novaware.tulover.transfer.TransferStore;
 
 public class AccountServiceImpl implements AccountService {

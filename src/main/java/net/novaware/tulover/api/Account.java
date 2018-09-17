@@ -1,4 +1,4 @@
-package net.novaware.tulover.account;
+package net.novaware.tulover.api;
 
 import java.math.BigDecimal;
 
@@ -10,6 +10,9 @@ public class Account implements Cloneable {
   public static final String MEDIA_TYPE = "application/vnd.novaware.tulover.account.v1";
   public static final String MEDIA_TYPE_JSON = MEDIA_TYPE + "+json";
   public static final String MEDIA_TYPE_JSON_UTF8 = MEDIA_TYPE_JSON + ";charset=utf8";
+  
+  // should be generated in meta class by annotation processor
+  public static final String PROPERTY_BALANCE = "balance";
 
   private String number;
   private String owner;

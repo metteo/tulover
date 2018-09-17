@@ -1,4 +1,4 @@
-package net.novaware.tulover.util;
+package net.novaware.tulover.api;
 
 import java.beans.ConstructorProperties;
 import java.util.List;

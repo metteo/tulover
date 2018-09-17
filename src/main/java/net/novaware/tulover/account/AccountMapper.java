@@ -6,10 +6,12 @@ import java.util.UUID;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import net.novaware.tulover.api.Account;
+
 @Mapper(imports = UUID.class)
 public abstract class AccountMapper {
 
-  @Mapping(target = "balance", ignore = true)
+  @Mapping(target = Account.PROPERTY_BALANCE, ignore = true)
   public abstract Account toAccount(AccountEntity input);
   
   public abstract AccountEntity toAccountEntity(Account input);
