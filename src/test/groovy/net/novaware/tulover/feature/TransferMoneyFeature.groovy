@@ -1,6 +1,7 @@
 package net.novaware.tulover.feature
 
 import javax.ws.rs.client.ClientBuilder
+import javax.ws.rs.core.GenericType
 import javax.ws.rs.core.Response.Status
 
 import org.glassfish.jersey.client.proxy.WebResourceFactory
@@ -8,6 +9,7 @@ import org.glassfish.jersey.client.proxy.WebResourceFactory
 import net.novaware.tulover.Tulover
 import net.novaware.tulover.api.Account
 import net.novaware.tulover.api.AccountsResource
+import net.novaware.tulover.api.ItemHolder
 import net.novaware.tulover.api.Transfer
 import net.novaware.tulover.api.TransfersResource
 import spock.lang.Shared
@@ -64,7 +66,12 @@ class TransferMoneyFeature extends Specification {
     aliceUsdResp.status == 200
     aliceUsdBal.balance == -123.45g
     
-    // TODO: read transfers for account
+    and:
+    def aliceUsdTrsResp = accountsResource.getTransfers(aliceUsd.number)
+    def aliceUsdTrs = aliceUsdTrsResp.readEntity(new GenericType<ItemHolder<Transfer>>(){})
+    aliceUsdTrsResp.status == 200
+    aliceUsdTrs.count == 1
+    aliceUsdTrs.items[0] == created
   }
   
   Account create(Account account) {
