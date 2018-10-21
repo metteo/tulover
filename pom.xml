@@ -64,7 +64,7 @@
       <artifactId>mapstruct-jdk8</artifactId>
       <version>${mapstruct.version}</version>
     </dependency>
-    
+
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
@@ -78,7 +78,7 @@
       <version>1.1-groovy-2.4</version>
       <scope>test</scope>
     </dependency>
-    
+
     <dependency> <!-- enables mocking of classes (in addition to interfaces) -->
       <groupId>net.bytebuddy</groupId>
       <artifactId>byte-buddy</artifactId>
@@ -180,6 +180,28 @@
             <phase>package</phase>
           </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <version>1.4.7</version>
+        <executions>
+          <execution>
+            <id>default</id>
+            <goals>
+              <goal>build</goal>
+              <!-- <goal>push</goal> -->
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <repository>metteo/${project.artifactId}</repository>
+          <tag>${project.version}</tag>
+          <buildArgs>
+            <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+          </buildArgs>
+        </configuration>
       </plugin>
     </plugins>
   </build>
